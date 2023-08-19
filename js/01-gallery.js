@@ -41,6 +41,7 @@ galleryElements.addEventListener('click', event => {
     `);
 
     modal.show();
+    modal.close();
 
   document.addEventListener('keydown', escapeListener);
   
