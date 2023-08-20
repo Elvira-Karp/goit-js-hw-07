@@ -26,7 +26,7 @@ const createGalleryMarkup = galleryItems => {
 galleryElements.insertAdjacentHTML('beforeend', createGalleryMarkup(galleryItems));
 
 galleryElements.addEventListener('click', event => {
-    event.preventDefault(); 
+    event.preventDefault();
 
     if (event.target.nodeName !== "IMG") {
         return;
@@ -38,10 +38,23 @@ galleryElements.addEventListener('click', event => {
         <div>
             <img src="${originalImageUrl}" width="832" height="554" />
         </div>
-    `);
+    `, {
+        onShow: (instance) => {
+            instance.element().addEventListener('keydown', escapeListener);
+        }
+
+        
+        // onClose: (instance) => {
+        //         instance.element().addEventListener('keydown', escapeListener);
+        // }
+    }); 
+
+    function onKeyDown(event) {
+        console.log(event)
+    }
 
     modal.show();
-    modal.close();
+  
 
   document.addEventListener('keydown', escapeListener);
   
