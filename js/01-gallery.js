@@ -35,23 +35,19 @@ galleryElements.addEventListener('click', event => {
     const originalImageUrl = event.target.dataset.source;
 
     modal = basicLightbox.create(`
-        <div>
+    
             <img src="${originalImageUrl}" width="832" height="554" />
-        </div>
-    `, {
+      
+    `,
+      {
         onShow: (instance) => {
-            instance.element().addEventListener('keydown', escapeListener);
+            document.addEventListener('keydown', escapeListener);
+        },
+
+        onClose: (instance) => {
+                instance.removeEventListener('keydown', escapeListener);
         }
-
-        
-        // onClose: (instance) => {
-        //         instance.element().addEventListener('keydown', escapeListener);
-        // }
     }); 
-
-    function onKeyDown(event) {
-        console.log(event)
-    }
 
     modal.show();
   
@@ -69,13 +65,7 @@ modal.element().addEventListener('click', event => {
 function escapeListener(event) {
   if (event.code === 'Escape' && modal) {
     modal.close();
-    document.removeEventListener('keydown', escapeListener);
+    
   }
 }
 
-if (modal) {
-  modal.on('close', () => {
-    document.removeEventListener('keydown', escapeListener);
-  });
-}
-console.log(galleryItems);
