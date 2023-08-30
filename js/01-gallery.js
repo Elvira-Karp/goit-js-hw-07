@@ -45,7 +45,7 @@ galleryElements.addEventListener('click', event => {
         },
 
         onClose: (instance) => {
-                instance.removeEventListener('keydown', escapeListener);
+                document.removeEventListener('keydown', escapeListener);
         }
     }); 
 
